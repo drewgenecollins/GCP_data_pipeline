@@ -1,0 +1,9 @@
+gcloud functions deploy ^
+covid_gcs_to_bq ^
+--runtime python37 ^
+--trigger-http ^
+--allow-unauthenticated ^
+--service-account=account-1@drewcollins-project-1.iam.gserviceaccount.com ^
+--memory=128MB ^
+--entry-point=covid_gcs_to_bq ^
+--source=C:\Users\drewg\Documents\code\gcp_data_pipeline\functions\covid_gcs_to_bq

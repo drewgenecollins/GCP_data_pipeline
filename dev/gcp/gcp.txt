@@ -1,0 +1,17 @@
+set GOOGLE_APPLICATION_CREDENTIALS=C:\Users\drewg\Desktop\jobs\mobkoi\openfoodfacts-products.jsonl\GCP_data_pipeline\GCP_data_pipeline\key.json
+
+gcloud functions deploy ^
+covid_api_to_gcs ^
+--runtime python37 ^
+--trigger-http ^
+--allow-unauthenticated ^
+--service-account=account-1@drewcollins-project-1.iam.gserviceaccount.com ^
+--memory=128MB ^
+--env-vars-file=C:\Users\drewg\Documents\code\gcp_data_pipeline\dev\gcp\.env.yaml ^
+--entry-point=covid_api_to_gcp ^
+--source=
+
+
+url: https://us-central1-drewcollins-project-1.cloudfunctions.net/covid_api_to_gcs
+ 
+sourceUploadUrl: https://storage.googleapis.com/gcf-upload-us-central1-bdb0ff8c-da3a-4879-ad92-4179cf901392/0d3331fb-db91-4c3c-9056-1724c87eb97c.zip?GoogleAccessId=service-637745250747@gcf-admin-robot.iam.gserviceaccount.com&Expires=1626475252&Signature=l%2B5vc%2BfJJ9d3tlOCdG7VXQL%2FR42Cxi9Kf0ey45N0Nmasyq6cS9noqgSpms12l1oiharGw2%2FIMziH7%2BjWH8YcAspvBCuHcEPdb%2Bp6w54DSsVTL7QeRrrL67Rf%2FGRUq3sMFciqFgOMAC3ZNfgVjmzkzsQ2KQ5YAKqs3%2Bi24aBuHto6INmBMi6Ll8KhhuqwOLp3nzzBN2yvOQtNIxjYrCr7kIi3vl7Af5yxLd%2FTwgCFxn0lVRMuNn4g27UK2je903e78wUjmX57OnkfYZYQ270l132P4q5jST1ZSaGPWZnVO6Yu%2FGZamCq%2B4sj8V%2BAPHscBStGZNksZONyZHYXssAZc5w%3D%3D
