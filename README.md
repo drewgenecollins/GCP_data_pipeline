@@ -11,7 +11,7 @@ Invocation - Cloud function to be used to call API’s (if this is not possible 
 
 Data store - store data in GCS (google cloud storage)
 
-Database - store final data in BigQuery tables	
+Database - store final data in BigQuery tables
 
 ## APIs selected
 
@@ -61,3 +61,4 @@ https://cloud.google.com/functions/docs/calling/storage
 ### create cloud function arg for api key
 
 add agrs for cloud function
+

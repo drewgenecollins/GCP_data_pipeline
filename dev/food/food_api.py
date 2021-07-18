@@ -3,12 +3,13 @@ import json
 import random
 import os
 import datetime
+import re
 
 
 
 def openfoodfacts_codes_extractor():
     '''Extracts the codes from the 22G DB JSON'''
-    ip = "C:\\Users\drewg\Desktop\jobs\mobkoi\openfoodfacts-products.jsonl\openfoodfacts-products.json"
+    ip = r"C:\Users\drewg\Desktop\jobs\mobkoi\openfoodfacts-products.jsonl\openfoodfacts-products.json"
     with open(ip, encoding='cp437') as fp, open('codes.txt', 'w') as ofp:
         q= '\"code\":\"'
         for p, line in enumerate(fp):
@@ -17,30 +18,35 @@ def openfoodfacts_codes_extractor():
 
 
 
-def openfoodfacts_codes():
-    with open(r"C:\Users\drewg\Desktop\jobs\mobkoi\openfoodfacts-products.jsonl\codes.txt") as fp:
+def product_codes():
+    with open(r"C:\Users\drewg\Documents\code\gcp_data_pipeline\dev\food\codes.txt") as fp:
         i = 1860044
         code_indexes = random.sample(range(1,i), 2) # 300 samples for 5MB
         codes = []
         for p, line in enumerate(fp):
             if p in code_indexes:
                 codes.append(line.rstrip("\n"))
-        return (codes)
+    return (codes)
 
 
-def openfoodfacts(session, code):
+def openfoodfacts(code):
+    '''calls api and gives json'''
     r = requests.get( 
         url =  "https://world.openfoodfacts.org/api/v0/product/" 
         + code + ".json"
     )
-    # print(r.text)
-    with open(session + '\\' + code + '-food'+ '.json', 'w') as fp:
-        json.dump(r.json(), fp,  indent=4)
+    return (r.json())
 
 
+def per_product_jsonl(sessions):
+    code = product_codes()[0]
+    x = '{}\\{}-food.json'.format(sessions, code)
 
-def openfoodfacts_loop():
-    sessions =  "C:\\Users\drewg\Desktop\jobs\mobkoi\openfoodfacts-products.jsonl"
+    with open(x, 'w') as fp:
+        json.dump(openfoodfacts(code), fp,  indent=4)
+
+
+def food_loop_many_jsons(sessions):
     session = sessions + '\\' + datetime.datetime.now().strftime("%Y%m%d_%H%M") + '_FOOD'
     print(session)
     if os.path.exists(session):
@@ -50,13 +56,101 @@ def openfoodfacts_loop():
         for code in openfoodfacts_codes():
             openfoodfacts(session, code)
 
+def modify_json(input_json):
+    '''corrects format of JSON keys for big query import '''
 
+    ps = json.dumps(input_json) # product string from json
+
+    pattern = re.compile(r'(?<=\")(\w*-\w*)*(?=\":)') # finds all keys that have a dash
+    match = pattern.search(ps)
+    while match is not None:
+        new_str = match.group().replace('-', '_')
+        ps = ps[:match.start()] + new_str + ps[match.end():]
+        match = pattern.search(ps)
+
+    pattern = re.compile(r'(?<=\")(\w*:\w*)*(?=\":)') # finds all keys that have a dash
+    match = pattern.search(ps)
+    while match is not None:
+        new_str = match.group().replace(':', '_')
+        ps = ps[:match.start()] + new_str + ps[match.end():]
+        match = pattern.search(ps)
+
+    pattern = re.compile(r'(?<=\")\d\w*(?=\":)') # finds all keys that start with a number
+    match = pattern.search(ps)
+    while match is not None:
+        new_str = '_' + match.group()
+        ps = ps[:match.start()] + new_str + ps[match.end():]
+        match = pattern.search(ps)
+
+    ps = ps.replace('{}', '[]')
+
+    return(json.loads(ps))
+
+
+
+def multi_product_jsonl(sessions):
+    
+    f = sessions + '\\' + datetime.datetime.now().strftime("%Y%m%d_%H%M") + '_food.jsonl'
+    print(f)
+
+    with open(f, 'w') as fp:
+        for code in product_codes():
+            j = openfoodfacts(code) # call api with code and gives json
+            m = modify_json(j)      # corrects format of JSON keys for big query import
+            json.dump(m, fp)
+            fp.write('\n')
+
+    return(f)
+
+
+def curly():
+    text = 'asdf asdd {} qa'
+    text = text.replace('{}', '[]')
+    print(text)
 
 def main():
-    # openfoodfacts()
-    # openfoodfacts_codes()
-    openfoodfacts_loop()
+    sessions =  "C:\\Users\\drewg\\Documents\\code\\gcp_data_pipeline\\dev\\tests"
     # openfoodfacts_codes_extractor()
+    # openfoodfacts()
+    # per_product_jsonl(sessions)
+    # openfoodfacts_codes()
+    multi_product_jsonl(sessions)
+    # curly()
+
+
 
 if __name__ == '__main__':
     main()
+
+
+    '''
+    Issue with keys having dash instead of underscore.
+    Need to correct dashes but easier to debug with a single product json.
+
+    Test setup and 
+    1. DONE Create single product json, indent to see all keys
+    ^ useful if manual schema necessary
+
+    2. DONE Create single product json, single line to pass jsonL into bq
+    - test
+    3. replace("org-database-usda","org_database_usda") or manually
+    - test
+    4. better logic, find all keys in file, and cover all dashes - into underscores _
+    - test
+  
+    5. NEW 400 KEY error.
+
+    find way to query all keys in json object
+
+    ----
+
+
+
+    Invalid field name "org-database-usda". Fields must contain only letters, numbers, and underscores, start with a letter or underscore, and be at most 300 characters long. Table: test_food_705b4148_61db_438d_bce3_17a453ff7166_source
+    
+    Invalid field name "400". Fields must contain only letters, numbers, and underscores, start with a letter or underscore, and be at most 300 characters long. Table: 20210717_1803_food_86928453_b249_4352_b203_9d10969ea70b_source
+    
+    Invalid field name "ciqual_food_code:en". Fields must contain only letters, numbers, and underscores, start with a letter or underscore, and be at most 300 characters long. Table: 20210718_1732_food_0470cb86_3c79_408a_9f70_f78478881e65_source
+    
+    Unsupported empty struct type for field 'product.category_properties'
+    '''
