@@ -8,6 +8,11 @@ import multiprocessing
 import time
 import ast
 
+# set join timeout to zero
+# use time module to create a conditional and timeout terminate tht way
+
+
+
 def product_codes(sample_size):
     with open(r"C:\Users\drewg\Documents\code\gcp_data_pipeline\dev\food\codes.txt") as fp:
         i = 1860044

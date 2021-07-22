@@ -10,3 +10,34 @@ url: https://us-central1-drewcollins-project-1.cloudfunctions.net/covid_api_to_g
  
 sourceUploadUrl: https://storage.googleapis.com/gcf-upload-us-central1-bdb0ff8c-da3a-4879-ad92-4179cf901392/0d3331fb-db91-4c3c-9056-1724c87eb97c.zip?GoogleAccessId=service-637745250747@gcf-admin-robot.iam.gserviceaccount.com&Expires=1626475252&Signature=l%2B5vc%2BfJJ9d3tlOCdG7VXQL%2FR42Cxi9Kf0ey45N0Nmasyq6cS9noqgSpms12l1oiharGw2%2FIMziH7%2BjWH8YcAspvBCuHcEPdb%2Bp6w54DSsVTL7QeRrrL67Rf%2FGRUq3sMFciqFgOMAC3ZNfgVjmzkzsQ2KQ5YAKqs3%2Bi24aBuHto6INmBMi6Ll8KhhuqwOLp3nzzBN2yvOQtNIxjYrCr7kIi3vl7Af5yxLd%2FTwgCFxn0lVRMuNn4g27UK2je903e78wUjmX57OnkfYZYQ270l132P4q5jST1ZSaGPWZnVO6Yu%2FGZamCq%2B4sj8V%2BAPHscBStGZNksZONyZHYXssAZc5w%3D%3D
 
+
+
+
+
+  url: https://us-central1-drewcollins-project-1.cloudfunctions.net/food_api_to_gcs
+ingressSettings: ALLOW_ALL
+labels:
+  deployment-tool: cli-gcloud
+name: projects/drewcollins-project-1/locations/us-central1/functions/food_api_to_gcs
+runtime: python37
+serviceAccountEmail: account-1@drewcollins-project-1.iam.gserviceaccount.com
+sourceUploadUrl: https://storage.googleapis.com/gcf-upload-us-central1-bdb0ff8c-da3a-4879-ad92-4179cf901392/3db4ef5d-c668-477b-9cf1-322e3682af55.zip?GoogleAccessId=service-637745250747@gcf-admin-robot.iam.gserviceaccount.com&Expires=1626973985&Signature=jE9Dcl0%2F9dvQ35s1hQ424dwRheHMVOOf6IyZz3mvmTbkv7lUYbUwYGD%2BI%2FqmsO1oxyhxUlIDDYqidGo3q6olFN3EID1nxadwzHFvq2fI2BaJIrXxD7KG4LSlKehRrEKlUqPneTXkXDcsd2y73j1QnFq32AI%2FjEWv3%2BPWXTmDq51qSdIZp2PTgo85h12902Mlcy4AuLYIVVX4P4JHoT0mwI2EbVP2dSL5Rz4YVBQWCsdAxfOzQDPpSDtF6KqlXOrCYncBJTR6YBSVjaqxf80v55ezFvU68NcelObh%2BD1z8dZ65dwkuRzwxtS%2F2bUbGtJIBA9Zx0pY5nYIY8jhpchhVw%3D%3D
+
+  url: https://us-central1-drewcollins-project-1.cloudfunctions.net/food_gcs_to_bq
+ingressSettings: ALLOW_ALL
+labels:
+  deployment-tool: cli-gcloud
+name: projects/drewcollins-project-1/locations/us-central1/functions/food_gcs_to_bq
+runtime: python37
+serviceAccountEmail: account-1@drewcollins-project-1.iam.gserviceaccount.com
+sourceUploadUrl: https://storage.googleapis.com/gcf-upload-us-central1-bdb0ff8c-da3a-4879-ad92-4179cf901392/f6085947-f6e8-4b5a-9e7a-43a1dc6caa93.zip?GoogleAccessId=service-637745250747@gcf-admin-robot.iam.gserviceaccount.com&Expires=1626976588&Signature=NOMZ7U%2FeX8iK1xaOnmcv6pGnCr3zAjU7upawCfO0Y%2BbpOLtNUvMhcS6fOhmlE4xabx2MDmQuhu43i%2FjBpBuf8rSjcY9fH5KcUnYhfcBhkHz2B63f8x7FrgczK9z2twN9et7yZy9Wu1zJD3%2Fh6ury23toU5x4g68950CPmNe12yX%2FQvINvZ%2BY%2Favro349Wng5bhFMPU7F0XnHXiBn13x1ihBpCnmjX5EeUyZ37aTMpWbRpbVd5Qzlpa459K6tmqIZ3x9NDdm%2Bh2Wu6zPYC83CzJpXN%2BBKDjdngZ9z4lg%2B%2BqmbEO3wsbt7toABRQ%2Bkee9JxrOH%2FFHH89apl%2F8WiaGfJg%3D%3D
+
+
+  url: https://us-central1-drewcollins-project-1.cloudfunctions.net/food_api_to_gcs
+ingressSettings: ALLOW_ALL
+labels:
+  deployment-tool: cli-gcloud
+name: projects/drewcollins-project-1/locations/us-central1/functions/food_api_to_gcs
+runtime: python37
+serviceAccountEmail: account-1@drewcollins-project-1.iam.gserviceaccount.com
+sourceUploadUrl: https://storage.googleapis.com/gcf-upload-us-central1-bdb0ff8c-da3a-4879-ad92-4179cf901392/a0165604-91e5-45e2-b8c9-0993c6e042c9.zip?GoogleAccessId=service-637745250747@gcf-admin-robot.iam.gserviceaccount.com&Expires=1626978433&Signature=dLgGc28FOxKgguB7AMWJlsIh3O3DGiS%2FIlXKQFvJoWO1x2GdLqixGtyqqfrMikfazkugWiMkESSjBw1jyuLv1jqZdiJc9tloLBYqKwd8Mf9sJyB%2Ftk6nJh8UrFuwIsQGzumbI64POCsBwSNuk8nzVbzmzXEctpbOQgfIH57oGVwUFiGU4EeASMrfxRI2tAJL7z0J1DH4ehRs%2FTe53mRd%2BFePgmSmCROOcPuyoQSwDCYzdrkacdCkRjiu5L85zWmDEhOJJ5hYrTRSd2b2U%2Bt9hcZbAfoywRiyhE0E8xS7QppH8ainNcMA1qwr2gEnUsw8Y3DSdF4kmIAUX7r6aEa2Ug%3D%3D

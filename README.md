@@ -62,3 +62,17 @@ https://cloud.google.com/functions/docs/calling/storage
 
 add agrs for cloud function
 
+## food api timeout(extra)
+
+dev/food_api3.py
+set join timeout to zero
+use time module to create a conditional and timeout terminate that way
+
+## food api data import failing from blobs
+
+Error while reading data, error message: JSON table encountered too many errors, giving up. Rows: 1; errors: 1. Please look into the errors[] collection for more details.
+Error while reading data, error message: JSON processing encountered too many errors, giving up. Rows: 1; errors: 1; max bad: 0; error percent: 0
+Error while reading data, error message: JSON parsing error in row starting at position 0: Only optional fields can be set to NULL. Field: ingredients_debug; Value: NULL
+
+gcs to bq food function seems fine
+issue likely with api to gcs blob creation

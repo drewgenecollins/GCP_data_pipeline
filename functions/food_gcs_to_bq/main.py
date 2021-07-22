@@ -1,21 +1,15 @@
-from google.cloud import storage
-import requests
-import datetime
-import json
-import os
+from google.cloud import bigquery
 
 def food_gcs_to_bq(request):
-
-    # pip install --upgrade google-cloud-bigquery
     
     blob_name = request.args.get('blob_name')
-    # blob_name = '20210716_1136_covid_blob'
+    # blob_name = '20210722_1654_food_blob'
     
     client = bigquery.Client()
 
     table_id = '{}.{}.{}_table'.format(
         'drewcollins-project-1',
-        'covid',
+        'food',
         blob_name
     )
     job_config = bigquery.LoadJobConfig(

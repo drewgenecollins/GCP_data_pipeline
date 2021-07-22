@@ -21,7 +21,7 @@ def openfoodfacts_codes_extractor():
 
 
 def product_codes(sample_size):
-    with open(r"C:\Users\drewg\Documents\code\gcp_data_pipeline\dev\food\codes.txt") as fp:
+    with open("codes.txt") as fp:
         i = 1860044
         code_indexes = random.sample(range(1,i), sample_size) # 300 samples for 5MB
         codes = []
@@ -69,7 +69,6 @@ def modify_json(input_json):
 
     ps = ps.replace('{}', '[]')
 
-    print(type(json.loads(ps)))
     return(json.loads(ps))
 
     
@@ -93,15 +92,10 @@ def multi_product_jsonl(sessions):
     return(f)
 
 
-def curly():
-    text = 'asdf asdd {} qa'
-    text = text.replace('{}', '[]')
-    print(text)
 
 def main():
     sessions =  "C:\\Users\\drewg\\Documents\\code\\gcp_data_pipeline\\dev\\tests"
     multi_product_jsonl(sessions)
-
 
 
 

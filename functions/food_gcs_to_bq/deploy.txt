@@ -1,10 +1,9 @@
 gcloud functions deploy ^
-food_gcs_bq ^
+food_gcs_to_bq ^
 --runtime python37 ^
 --trigger-http ^
 --allow-unauthenticated ^
 --service-account=account-1@drewcollins-project-1.iam.gserviceaccount.com ^
 --memory=128MB ^
---env-vars-file=C:\Users\drewg\Documents\code\gcp_data_pipeline\dev\keys\.env.yaml ^
---entry-point=food_gcs_bq ^
---source=C:\Users\drewg\Documents\code\gcp_data_pipeline\functions\food_gcs_bq
+--entry-point=food_gcs_to_bq ^
+--source=C:\Users\drewg\Documents\code\gcp_data_pipeline\functions\food_gcs_to_bq

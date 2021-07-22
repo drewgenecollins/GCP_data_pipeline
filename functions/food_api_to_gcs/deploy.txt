@@ -4,6 +4,5 @@ food_api_to_gcs ^
 --trigger-http ^
 --allow-unauthenticated ^
 --service-account=account-1@drewcollins-project-1.iam.gserviceaccount.com ^
---memory=128MB ^
 --entry-point=food_api_to_gcs ^
 --source=C:\Users\drewg\Documents\code\gcp_data_pipeline\functions\food_api_to_gcs
