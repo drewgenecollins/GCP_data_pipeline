@@ -21,58 +21,20 @@ Food info https://world.openfoodfacts.org/api/v0/product/
 
 ## Pipeline
 
-1. Daily, HTTP call to cloud functions covid_api_to_gcs and food_api_to_gcs
+Daily, call the script `gcp_data_pipeline.py`.
 
-2. Fill out blob names and HTTP call cloud functions covid_gcs_to_bq and food_gcs_to_bq
+1. Script calls 2 APIs
 
-## todo
+2. Stores data in GCS
 
-### call API request for data
+3. Imports data into BigQuery tables
 
-### Write file data to bucket
+Result within 2 BQ datasets called "covid" and "food".
 
-need authentication to access bucket
+## about
 
-https://googleapis.dev/python/storage/latest/index.html
+Please reach me at drewgenecollins@gmail.com for further questions and accessing the GCP project.
 
-https://cloud.google.com/functions/docs/concepts/exec#functions-concepts-stateless-python
+## questions
 
-https://cloud.google.com/appengine/docs/standard/python/googlecloudstorageclient/read-write-to-cloud-storage
-
-https://cloud.google.com/functions/docs/writing/http#uploading_files_via_cloud_storage
-
-access bucket from cloud functions
-
-https://pythonexamples.org/python-requests-http-put/
-
-gcloud projects add-iam-policy-binding drewcollins-project-1 --member serviceAccount:account-1@drewcollins-project-1.iam.gserviceaccount.com --role roles/iam.serviceAccountTokenCreator
-
-changed the service account listed for function-3
-
-https://us-central1-drewcollins-project-1.cloudfunctions.net/function-5
-
-cloud function now writes covid data to blucket blob
-
-## import data into bigquery
-
-if want to get fancy
-https://cloud.google.com/functions/docs/calling/storage
-
-### create cloud function arg for api key
-
-add agrs for cloud function
-
-## food api timeout(extra)
-
-dev/food_api3.py
-set join timeout to zero
-use time module to create a conditional and timeout terminate that way
-
-## food api data import failing from blobs
-
-Error while reading data, error message: JSON table encountered too many errors, giving up. Rows: 1; errors: 1. Please look into the errors[] collection for more details.
-Error while reading data, error message: JSON processing encountered too many errors, giving up. Rows: 1; errors: 1; max bad: 0; error percent: 0
-Error while reading data, error message: JSON parsing error in row starting at position 0: Only optional fields can be set to NULL. Field: ingredients_debug; Value: NULL
-
-gcs to bq food function seems fine
-issue likely with api to gcs blob creation
+Document link coming soon.
