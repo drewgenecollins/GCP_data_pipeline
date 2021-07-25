@@ -21,7 +21,7 @@ Food info https://world.openfoodfacts.org/api/v0/product/
 
 ## Pipeline
 
-Daily, call the script `gcp_data_pipeline.py`.
+Daily, call the script `gcp_data_pipeline.py`
 
 1. Script calls 2 APIs
 
