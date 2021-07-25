@@ -35,6 +35,6 @@ Result within 2 BQ datasets called "covid" and "food".
 
 Please reach me at drewgenecollins@gmail.com for further questions and accessing the GCP project.
 
-## questions
+## Presentation
 
-Document link coming soon.
+https://docs.google.com/presentation/d/1aEcnMI2L_ljvqloekexlvzGrtKwOM4LNVW0YmKePfgI/edit?usp=sharing
